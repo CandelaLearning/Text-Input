@@ -1,0 +1,111 @@
+stop();
+
+var tries1 = 1;
+var tries2 = 1;
+var tries3 = 1;
+var ActivityCount = 0;
+var answer1: String = "5";
+var answer2: String = "2.5";
+var answer3: String = "2500";
+
+submitBtn1.visible = false;
+submitBtn2.visible = false;
+submitBtn3.visible = false;
+
+input1.restrict = ". 0-9";
+input1.maxChars = 4;
+input1.addEventListener(FocusEvent.FOCUS_IN, setFIn1);
+
+input2.restrict = ". 0-9";
+input2.maxChars = 4;
+input2.addEventListener(FocusEvent.FOCUS_IN, setFIn2);
+
+input3.restrict = ". 0-9";
+input3.maxChars = 4;
+input3.addEventListener(FocusEvent.FOCUS_IN, setFIn3);
+
+function setFIn1(focus: FocusEvent): void {
+	submitBtn1.visible = true;
+	submitBtn1.addEventListener(MouseEvent.CLICK, check1);
+}
+
+function check1(event: MouseEvent) {
+	if (input1.text == answer1) {
+		submitBtn1.visible = false;
+		textBoxBg1.gotoAndPlay("correct");
+		input1.removeEventListener(FocusEvent.FOCUS_IN, setFIn1);
+		input1.selectable = false;
+		ActivityCount++;
+	} else if (tries1 == 3) {
+		input1.text = answer1;
+		submitBtn1.visible = false;
+		input1.removeEventListener(FocusEvent.FOCUS_IN, setFIn1);
+		ActivityCount++;
+		input1.selectable = false;
+	} else {
+		tries1++;
+		textBoxBg1.gotoAndPlay("wrong");
+		input1.text = "";
+	}
+	checkEnd();
+}
+
+function setFIn2(focus: FocusEvent): void {
+	submitBtn2.visible = true;
+	submitBtn2.addEventListener(MouseEvent.CLICK, check2);
+}
+
+
+function check2(event: MouseEvent) {
+	if (input2.text == answer2) {
+		submitBtn2.visible = false;
+		textBoxBg2.gotoAndPlay("correct");
+		input2.removeEventListener(FocusEvent.FOCUS_IN, setFIn2);
+		ActivityCount++;
+		input2.selectable = false;
+	} else if (tries2 == 3) {
+		input2.text = answer2;
+		submitBtn2.visible = false;
+		input2.removeEventListener(FocusEvent.FOCUS_IN, setFIn2);
+		ActivityCount++;
+		input2.selectable = false;
+	} else {
+		tries2++;
+		textBoxBg2.gotoAndPlay("wrong");
+		input2.text = "";
+	}
+	checkEnd();
+}
+
+function setFIn3(focus: FocusEvent): void {
+	submitBtn3.visible = true;
+	submitBtn3.addEventListener(MouseEvent.CLICK, check3);
+}
+
+
+function check3(event: MouseEvent) {
+	if (input3.text == answer3) {
+		submitBtn3.visible = false;
+		textBoxBg3.gotoAndPlay("correct");
+		input3.removeEventListener(FocusEvent.FOCUS_IN, setFIn3);
+		ActivityCount++;
+		input3.selectable = false;
+	} else if (tries3 == 3) {
+		input3.text = answer3;
+		submitBtn3.visible = false;
+		input3.removeEventListener(FocusEvent.FOCUS_IN, setFIn3);
+		ActivityCount++;
+		input3.selectable = false;
+	} else {
+		tries3++;
+		textBoxBg3.gotoAndPlay("wrong");
+		input3.text = "";
+	}
+	checkEnd();
+}
+
+function checkEnd() {
+	if (ActivityCount == 3) {
+		gotoAndStop("End");
+	}
+}
